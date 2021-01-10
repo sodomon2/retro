@@ -3,7 +3,6 @@ local utils   = require 'lib.utils'
 
 local lgi     = require 'lgi'
 local Gtk     = lgi.Gtk
-local Gdk     = lgi.Gdk
 local Retro   = lgi.Retro
 
 local builder = Gtk.Builder()
