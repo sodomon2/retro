@@ -8,6 +8,14 @@ builder:add_from_file('retro.ui')
 
 local rom, core = nil, nil
 
+local function uriname(uri)
+    local t = {}
+    for str in string.gmatch(uri, "([^/]+)") do
+            table.insert(t, str)
+    end
+    return t[#t]
+end
+
 local function sensitive(boolean)
   ui.btn_start_rom.sensitive = boolean
   ui.btn_stop_rom.sensitive = boolean
@@ -59,7 +67,7 @@ function ui.btn_start_rom.on_clicked()
   core.boot(core)
   core.run(core)
   ui.btn_load_rom.sensitive = false
-  ui.headerbar.subtitle = utils:path_name(rom).name
+  ui.headerbar.subtitle = uriname(rom)
 end
 
 function ui.window.on_destroy()
