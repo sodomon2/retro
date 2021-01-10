@@ -15,7 +15,7 @@ function sensitive(boolean)
 end
 
 function get_cores()
-    local libretro = '/usr/lib/libretro/'
+    local libretro = '/usr/lib/libretro'
     ui.core_select:remove_all()
     for item in io.popen( ('ls  %s/*_libretro.so'):format(libretro) ):lines() do
         ui.core_select:append(
