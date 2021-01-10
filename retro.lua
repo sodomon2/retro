@@ -38,11 +38,14 @@ local view = Retro.CoreView()
 function ui.core_select:on_changed()
     core = Retro.Core.new(self:get_active_id())
     view.set_core(view, core)
+    ui.btn_load_rom.sensitive = true
     print(self:get_active_id())
 end
 view.show(ui.window)
 
 if rom == nil then sensitive(false) end
+
+if ui.core_select:get_active_id() == nil then ui.btn_load_rom.sensitive = false end
 
 function ui.btn_load_rom.on_clicked()
   ui.load_rom_dialog:run()
