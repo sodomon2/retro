@@ -2,7 +2,7 @@ require 'lib.middleclass'
 local utils   = require 'lib.utils'
 
 local lgi     = require 'lgi'
-local Gtk     = lgi.Gtk
+local Gtk     = lgi.require('Gtk', '3.0')
 local Retro   = lgi.Retro
 
 local builder = Gtk.Builder()
