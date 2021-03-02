@@ -54,7 +54,7 @@ end
 
 function ui.btn_stop_rom.on_clicked()
   sensitive(false)
-  core:stop(core)
+  core:stop()
   ui.headerbar.subtitle = "LibRetro frontend sample"
   ui.btn_load_rom.sensitive = true
 end
@@ -67,8 +67,8 @@ function ui.btn_rom_load.on_clicked()
 end
 
 function ui.btn_start_rom.on_clicked()
-  core:boot(core)
-  core:run(core)
+  core:boot()
+  core:run()
   ui.btn_load_rom.sensitive = false
   ui.headerbar.subtitle = uriname(rom)
 end
