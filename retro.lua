@@ -29,7 +29,7 @@ local function get_cores()
 	        item,
 	        item:match("^.+/(.+)$")
         )
-        print(item, item:match("^.+/(.+)$"))
+        print(item:match("^.+/(.+)$"))
     end
 end
 get_cores()
@@ -37,14 +37,14 @@ get_cores()
 local view = Retro.CoreView()
 function ui.core_select:on_changed()
     core = Retro.Core.new(self:get_active_id())
-    view.set_core(view, core)
+    view:set_core(core)
+    view:set_as_default_controller(core)
     ui.btn_load_rom.sensitive = true
     print(self:get_active_id())
 end
-view.show(ui.window)
+view:show(ui.window)
 
 if rom == nil then sensitive(false) end
-
 if ui.core_select:get_active_id() == nil then ui.btn_load_rom.sensitive = false end
 
 function ui.btn_load_rom.on_clicked()
@@ -54,21 +54,21 @@ end
 
 function ui.btn_stop_rom.on_clicked()
   sensitive(false)
-  core.stop(core)
+  core:stop(core)
   ui.headerbar.subtitle = "LibRetro frontend sample"
   ui.btn_load_rom.sensitive = true
 end
 
 function ui.btn_rom_load.on_clicked()
   rom = ui.load_rom_dialog:get_filename(chooser)
-  core.set_medias(core, {"file://" .. rom})
+  core:set_medias({"file://" .. rom})
   sensitive(true)
   ui.load_rom_dialog:hide()
 end
 
 function ui.btn_start_rom.on_clicked()
-  core.boot(core)
-  core.run(core)
+  core:boot(core)
+  core:run(core)
   ui.btn_load_rom.sensitive = false
   ui.headerbar.subtitle = uriname(rom)
 end
