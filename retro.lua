@@ -16,11 +16,6 @@ local function uriname(uri)
     return t[#t]
 end
 
-local function sensitive(boolean)
-  ui.btn_start_rom.sensitive = boolean
-  ui.btn_stop_rom.sensitive = boolean
-end
-
 local function get_cores()
     local libretro = arg[1] or '$HOME/.config/retroarch/cores'
     ui.core_select:remove_all()
@@ -44,7 +39,7 @@ function ui.core_select:on_changed()
 end
 view:show(ui.window)
 
-if rom == nil then sensitive(false) end
+if rom == nil then ui.btn_stop_rom.sensitive = false end
 if ui.core_select:get_active_id() == nil then ui.btn_load_rom.sensitive = false end
 
 function ui.btn_load_rom.on_clicked()
@@ -53,8 +48,8 @@ function ui.btn_load_rom.on_clicked()
 end
 
 function ui.btn_stop_rom.on_clicked()
-  sensitive(false)
   core:stop()
+  ui.btn_stop_rom.sensitive = false
   ui.headerbar.subtitle = "LibRetro frontend sample"
   ui.btn_load_rom.sensitive = true
 end
@@ -62,15 +57,12 @@ end
 function ui.btn_rom_load.on_clicked()
   rom = ui.load_rom_dialog:get_filename(chooser)
   core:set_medias({"file://" .. rom})
-  sensitive(true)
-  ui.load_rom_dialog:hide()
-end
-
-function ui.btn_start_rom.on_clicked()
   core:boot()
   core:run()
-  ui.btn_load_rom.sensitive = false
   ui.headerbar.subtitle = uriname(rom)
+  ui.btn_stop_rom.sensitive = true
+  ui.btn_load_rom.sensitive = false
+  ui.load_rom_dialog:hide()
 end
 
 function ui.window.on_destroy()
