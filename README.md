@@ -2,7 +2,7 @@
 
 Retro is a Libretro frontend sample in lua
 
-![screenshot](https://i.imgur.com/iTD8R7u.png)
+![screenshot](https://github.com/sodomon2/project-screenshot/blob/master/retro/screenshot.png?raw=true)
 
 ## Dependencies
 
