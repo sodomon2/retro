@@ -110,9 +110,6 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="focus_on_click">False</property>
-            <items>
-              <item translatable="yes">snes9x_libretro.so</item>
-            </items>
           </object>
           <packing>
             <property name="pack_type">end</property>

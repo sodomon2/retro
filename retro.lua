@@ -18,7 +18,6 @@ end
 
 local function get_cores()
     local libretro = arg[1] or '$HOME/.config/retroarch/cores'
-    ui.core_select:remove_all()
     for item in io.popen(('ls %s/*_libretro.so'):format(libretro)):lines() do
         ui.core_select:append(
 	        item,
