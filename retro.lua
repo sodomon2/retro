@@ -4,10 +4,10 @@ local Retro   = lgi.Retro
 
 local builder = Gtk.Builder()
 local ui      = builder.objects
+local view    = Retro.CoreView()
 builder:add_from_file('retro.ui')
 
 local rom, core = nil, nil
-
 local function uriname(uri)
     local t = {}
     for str in string.gmatch(uri, "([^/]+)") do
@@ -28,7 +28,6 @@ local function get_cores()
 end
 get_cores()
 
-local view = Retro.CoreView()
 function ui.core_select:on_changed()
     core = Retro.Core.new(self:get_active_id())
     view:set_core(core)
@@ -36,7 +35,6 @@ function ui.core_select:on_changed()
     ui.btn_load_rom.sensitive = true
     print(self:get_active_id())
 end
-view:show(ui.window)
 
 if rom == nil then ui.btn_stop_rom.sensitive = false end
 if ui.core_select:get_active_id() == nil then ui.btn_load_rom.sensitive = false end
